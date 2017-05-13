@@ -9,6 +9,9 @@ export function render(el, state) {
 }
 
 function renderApp(input, todoList) {
+    if(isEnabled('filter')) {
+      // TODO HERE
+    }
     if(isEnabled('renderBottom')) {
         return renderAddTodoAtBottom(input, todoList);
     } else {
