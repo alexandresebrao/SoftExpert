@@ -3,10 +3,12 @@ import {listen} from './lib/events';
 import {addTodo, toggleTodoState} from './actions';
 
 export function registerEventHandlers() {
+
     listen('click', '#addTodo', event => {
         const todoInput = document.getElementById('todoInput');
         todos.dispatch(addTodo(todoInput.value));
         event.stopPropagation();
+        document.getElementById("todoInput").focus();
     });
 
     listen('keydown', '#todoInput', event => {
@@ -23,4 +25,10 @@ export function registerEventHandlers() {
         const id = Number.parseInt(event.target.getAttribute('data-id'), 10);
         todos.dispatch(toggleTodoState(id));
     });
+
+    listen('click', '#filterRadio', event => {
+        console.log(event.toElement.value);
+    });
+
+
 }

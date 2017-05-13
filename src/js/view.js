@@ -4,19 +4,28 @@ export function render(el, state) {
     const todoItems = state.todos.map(renderTodoItem).join('');
     el.innerHTML = renderApp(
         renderInput(),
-        renderTodos(todoItems)
+        renderTodos(todoItems),
+        renderFilters(),
     );
 }
 
-function renderApp(input, todoList) {
+function renderApp(input, todoList, filters) {
     if(isEnabled('filter')) {
-      // TODO HERE
+      return  renderAddTodoAtTopFilter(input, todoList, filters);
     }
     if(isEnabled('renderBottom')) {
         return renderAddTodoAtBottom(input, todoList);
     } else {
         return renderAddTodoAtTop(input, todoList);
     }
+}
+
+function renderAddTodoAtTopFilter(input, todoList, filters) {
+    return `<div id="app">
+        ${input}
+        ${filters}
+        ${todoList}
+    </div>`;
 }
 
 function renderAddTodoAtTop(input, todoList) {
@@ -39,6 +48,10 @@ function renderInput() {
 
 function renderTodos(todoItems) {
     return `<ul class="todo">${todoItems}</ul>`;
+}
+
+function renderFilters() {
+  return  `<div class="todo__filter"><input type="radio" name="filterRadio" id="filterRadio" value="showall" checked="true">Show All</input><input type="radio" name="filterRadio" id="filterRadio" value="showopen">Open</input><input type="radio" name="filterRadio" id="filterRadio" value="showdone" >Done</input></div>`
 }
 
 function renderTodoItem(todo) {
