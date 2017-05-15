@@ -5,14 +5,10 @@ export function render(el, state) {
     el.innerHTML = renderApp(
         renderInput(),
         renderTodos(todoItems),
-        renderFilters(),
     );
 }
 
-function renderApp(input, todoList, filters) {
-    if(isEnabled('filter')) {
-      return  renderAddTodoAtTopFilter(input, todoList, filters);
-    }
+function renderApp(input, todoList) {
     if(isEnabled('renderBottom')) {
         return renderAddTodoAtBottom(input, todoList);
     } else {
@@ -20,25 +16,21 @@ function renderApp(input, todoList, filters) {
     }
 }
 
-function renderAddTodoAtTopFilter(input, todoList, filters) {
-    return `<div id="app">
-        ${input}
-        ${filters}
-        ${todoList}
-    </div>`;
-}
 
 function renderAddTodoAtTop(input, todoList) {
     return `<div id="app">
         ${input}
+        ${isEnabled('filter') ? renderFilters() : ''}
         ${todoList}
     </div>`;
 }
 
 function renderAddTodoAtBottom(input, todoList) {
     return `<div id="app">
+        ${isEnabled('filter') && isEnabled('filterTop')  ? renderFilters() : ''}
         ${todoList}
         ${input}
+        ${isEnabled('filter') && !isEnabled('filterTop') ? renderFilters() : ''}
     </div>`;
 }
 
