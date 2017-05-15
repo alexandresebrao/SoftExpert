@@ -20,17 +20,17 @@ function renderApp(input, todoList) {
 function renderAddTodoAtTop(input, todoList) {
     return `<div id="app">
         ${input}
-        ${isEnabled('filter') ? renderFilters() : ''}
+        ${enableFilter ? renderFilters() : ''}
         ${todoList}
     </div>`;
 }
 
 function renderAddTodoAtBottom(input, todoList) {
     return `<div id="app">
-        ${isEnabled('filter') && isEnabled('filterTop')  ? renderFilters() : ''}
+        ${enableFilter && isEnabled('filterTop')  ? renderFilters() : ''}
         ${todoList}
         ${input}
-        ${isEnabled('filter') && !isEnabled('filterTop') ? renderFilters() : ''}
+        ${enableFilter && !isEnabled('filterTop') ? renderFilters() : ''}
     </div>`;
 }
 

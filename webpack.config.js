@@ -28,6 +28,7 @@ module.exports = {
         ]
     },
     plugins: [
+      new webpack.DefinePlugin( {'enableFilter': true}),
       new ExtractTextPlugin("styles.css"),
       new webpack.optimize.UglifyJsPlugin({
         compress: { warnings: false }
