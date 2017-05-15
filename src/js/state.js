@@ -45,4 +45,7 @@ function todoChangeHandler(state, change) {
     }
 }
 
-export const todos = createStore(todoChangeHandler, initialState);
+if (localStorage.getItem("todos") == null) {
+  localStorage.setItem("todos", JSON.stringify(initialState));
+}
+export const todos = createStore(todoChangeHandler, JSON.parse(localStorage.getItem("todos")));

@@ -8,6 +8,7 @@ export function registerEventHandlers() {
     listen('click', '#addTodo', event => {
         const todoInput = document.getElementById('todoInput');
         todos.dispatch(addTodo(todoInput.value));
+        localStorage.setItem("todos", JSON.stringify(todos.getState()))
         event.stopPropagation();
         document.getElementById("todoInput").focus();
     });
@@ -17,6 +18,7 @@ export function registerEventHandlers() {
         if (key === 13) {
           const todoInput = document.getElementById('todoInput');
           todos.dispatch(addTodo(todoInput.value));
+          localStorage.setItem("todos", JSON.stringify(todos.getState()));
           event.stopPropagation();
           document.getElementById("todoInput").focus();
         }
@@ -25,6 +27,7 @@ export function registerEventHandlers() {
     listen('click', '.js_toggle_todo', event => {
         const id = Number.parseInt(event.target.getAttribute('data-id'), 10);
         todos.dispatch(toggleTodoState(id));
+        localStorage.setItem("todos", JSON.stringify(todos.getState()))
     });
 
     listen('click', '#filterRadio', event => {
