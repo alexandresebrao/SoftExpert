@@ -43,7 +43,7 @@ function renderAddTodoAtBottom(input, todoList) {
 }
 
 function renderInput() {
-    return `<div class="todo__input"><input type="text" id="todoInput"><button id="addTodo">Add</button></div>`;
+    return `<div class="todo__input"><input type="text" id="todoInput"><button id="addTodo" class="btn btn-primary">Add</button></div>`;
 }
 
 function renderTodos(todoItems) {
@@ -51,7 +51,11 @@ function renderTodos(todoItems) {
 }
 
 function renderFilters() {
-  return  `<div class="todo__filter"><input type="radio" name="filterRadio" id="filterRadio" value="showall" checked="true">Show All</input><input type="radio" name="filterRadio" id="filterRadio" value="showopen">Open</input><input type="radio" name="filterRadio" id="filterRadio" value="showdone" >Done</input></div>`
+  return  `<div class="todo__filter">
+            <input type="radio" name="filterRadio" id="filterRadio" value="SHOWALL" checked="true">Show All</input>
+            <input type="radio" name="filterRadio" id="filterRadio" value="SHOWOPEN">Open</input>
+            <input type="radio" name="filterRadio" id="filterRadio" value="SHOWDONE" >Done</input>
+          </div>`
 }
 
 function renderTodoItem(todo) {

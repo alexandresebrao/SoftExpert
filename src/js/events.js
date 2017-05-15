@@ -1,6 +1,7 @@
 import {todos} from './state';
 import {listen} from './lib/events';
 import {addTodo, toggleTodoState} from './actions';
+import {visibilityFilter} from './reducers/visibilityFilter';
 
 export function registerEventHandlers() {
 
@@ -27,7 +28,7 @@ export function registerEventHandlers() {
     });
 
     listen('click', '#filterRadio', event => {
-        console.log(event.toElement.value);
+        visibilityFilter(event.toElement.value);
     });
 
 
