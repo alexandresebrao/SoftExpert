@@ -10,7 +10,7 @@ import Header from './components/header.js';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {renderBottom:isEnabled('renderBottom'), filter: 'showall', todos: todos.getState().todos};
+    this.state = {renderBottom: isEnabled('renderBottom'), filterTop: isEnabled('filterTop'), filter: 'showall', todos: todos.getState().todos};
     this.addTodo = this.addTodo.bind(this);
     this.toogleTodo = this.toogleTodo.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
@@ -45,12 +45,24 @@ class App extends Component {
         filter = <Filters onFilterChange={this.handleFilterChange} />
     }
 
+
+    if (this.state.renderBottom && this.state.filterTop) {
+      return (
+        <div className="container">
+          <Header />
+          {filter}
+          <TodosList todos = {this.state.todos} toogleTodo={this.toogleTodo} filter={this.state.filter}/>
+          <TodoInput onAdd={this.handleAdd} />
+        </div>
+      )
+    }
     if (this.state.renderBottom) {
       return (
         <div className="container">
           <Header />
-          <TodosList todos ={this.state.todos} toogleTodo={this.toogleTodo}/>
+          <TodosList todos = {this.state.todos} toogleTodo={this.toogleTodo} filter={this.state.filter}/>
           <TodoInput onAdd={this.handleAdd} />
+          {filter}
         </div>
       )
     }
