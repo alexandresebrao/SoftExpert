@@ -13,6 +13,7 @@ class TodoItem extends Component {
 class TodosList extends Component {
   constructor(props) {
     super(props);
+    this.state = {filter: this.props.filter, todos: this.props.todos}
     this.toogleTodo = this.toogleTodo.bind(this);
   }
 
@@ -20,8 +21,24 @@ class TodosList extends Component {
     this.props.toogleTodo(id);
   }
 
+
   render() {
-    var b = this.props.todos.map((item) => <TodoItem text={item.text} key={item.id} id={item.id} todoClass={item.done} toogleTodo={this.toogleTodo}/>)
+    var that = this;
+    var b = this.props.todos.map(function(item) {
+      if (that.props.filter === 'showall') {
+        return <TodoItem text={item.text} key={item.id} id={item.id} todoClass={item.done} toogleTodo={that.toogleTodo}/>
+      }
+      else if (that.props.filter === 'showdone') {
+        if (item.done) {
+          return <TodoItem text={item.text} key={item.id} id={item.id} todoClass={item.done} toogleTodo={that.toogleTodo}/>
+        }
+      }else if (that.props.filter === 'showopen') {
+        if (!item.done) {
+          return <TodoItem text={item.text} key={item.id} id={item.id} todoClass={item.done} toogleTodo={that.toogleTodo}/>
+        }
+      }
+    });
+
     return (<div className="styled-checkbox">
              {b}
             </div>

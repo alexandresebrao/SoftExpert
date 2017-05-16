@@ -10,10 +10,11 @@ import Header from './components/header.js';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {renderBottom:isEnabled('renderBottom'), filterDefault: 'showall', todos: todos.getState().todos};
+    this.state = {renderBottom:isEnabled('renderBottom'), filter: 'showall', todos: todos.getState().todos};
     this.addTodo = this.addTodo.bind(this);
     this.toogleTodo = this.toogleTodo.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
+    this.handleFilterChange = this.handleFilterChange.bind(this);
   }
 
   addTodo(text) {
@@ -34,10 +35,14 @@ class App extends Component {
     this.setState({todos: todos.getState().todos})
   }
 
+  handleFilterChange(value) {
+    this.setState({filter: value});
+  }
+
   render() {
     var filter = "";
     if (enableFilter) {
-        filter = <Filters />
+        filter = <Filters onFilterChange={this.handleFilterChange} />
     }
 
     if (this.state.renderBottom) {
@@ -55,7 +60,7 @@ class App extends Component {
           <Header />
           <TodoInput onAdd={this.handleAdd} />
           {filter}
-          <TodosList todos = {this.state.todos} toogleTodo={this.toogleTodo} />
+          <TodosList todos = {this.state.todos} toogleTodo={this.toogleTodo} filter={this.state.filter}/>
         </div>
       )
     }
