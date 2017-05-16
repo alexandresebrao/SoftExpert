@@ -51,6 +51,8 @@ class App extends Component {
         <div className="container">
           <Header />
           {filter}
+          <div className="spacer10"></div>
+          <h2>My ToDo(s)</h2>
           <TodosList todos = {this.state.todos} toogleTodo={this.toogleTodo} filter={this.state.filter}/>
           <TodoInput onAdd={this.handleAdd} />
         </div>
@@ -60,6 +62,8 @@ class App extends Component {
       return (
         <div className="container">
           <Header />
+          <h2>My ToDo(s)</h2>
+          <div className="spacer10"></div>
           <TodosList todos = {this.state.todos} toogleTodo={this.toogleTodo} filter={this.state.filter}/>
           <TodoInput onAdd={this.handleAdd} />
           {filter}
@@ -72,6 +76,8 @@ class App extends Component {
           <Header />
           <TodoInput onAdd={this.handleAdd} />
           {filter}
+          <h2>My ToDo(s)</h2>
+          <div className="spacer10"></div>
           <TodosList todos = {this.state.todos} toogleTodo={this.toogleTodo} filter={this.state.filter}/>
         </div>
       )

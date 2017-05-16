@@ -18,11 +18,21 @@ class Filters extends Component {
 
 
   render() {
-    return(  <div className="form-group"><div className="radio">
-                <label htmlFor="showall"><input type="radio" name="filterRadio" id="showall" value="showall" checked={this.state.selectedOption === 'showall'} onChange={this.handleOptionChange} />Show All</label>
-                <label htmlFor="showopen"><input type="radio" name="filterRadio" id="showopen" value="showopen" checked={this.state.selectedOption === 'showopen'} onChange={this.handleOptionChange} />Open</label>
-                <label htmlFor="showdone"><input type="radio" name="filterRadio" id="showdone" value="showdone" checked={this.state.selectedOption === 'showdone'}  onChange={this.handleOptionChange} />Done</label>
-              </div></div>)
+    return(  <div className="row">
+              <div className="form-group">
+                <div className="radio">
+                  <div className="col-sm-4">
+                    <label htmlFor="showall"><input type="radio" name="filterRadio" id="showall" value="showall" checked={this.state.selectedOption === 'showall'} onChange={this.handleOptionChange} />Show All</label>
+                  </div>
+                  <div className="col-sm-4">
+                    <label htmlFor="showopen"><input type="radio" name="filterRadio" id="showopen" value="showopen" checked={this.state.selectedOption === 'showopen'} onChange={this.handleOptionChange} />Open</label>
+                  </div>
+                  <div className="col-sm-4">
+                    <label htmlFor="showdone"><input type="radio" name="filterRadio" id="showdone" value="showdone" checked={this.state.selectedOption === 'showdone'}  onChange={this.handleOptionChange} />Done</label>
+                  </div>
+                </div>
+              </div>
+            </div>)
   }
 }
 

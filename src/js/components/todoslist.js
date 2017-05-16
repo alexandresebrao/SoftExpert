@@ -5,7 +5,12 @@ class TodoItem extends Component {
 
   render() {
     return(
-      <div><input onChange={event=>this.props.toogleTodo(this.props.id)} className="js_toggle_todo" type="checkbox" checked={this.props.todoClass}></input><span>{this.props.text}</span></div>
+      <div className="row form-group">
+        <div className="col-sm-10">
+          <input onChange={event=>this.props.toogleTodo(this.props.id)} className="js_toggle_todo" type="checkbox" checked={this.props.todoClass}></input>{this.props.text}
+        </div>
+      </div>
+
     )
   }
 }
@@ -39,8 +44,10 @@ class TodosList extends Component {
       }
     });
 
-    return (<div className="styled-checkbox">
-             {b}
+    return (<div className="content">
+              <div className="form-group">
+                {b}
+              </div>
             </div>
       )
   }

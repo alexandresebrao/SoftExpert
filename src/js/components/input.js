@@ -12,7 +12,7 @@ class TodoInput extends Component {
     this.props.onAdd(this.state.text);
     this.setState({text: ''});
     this.todoInput.value = '';
-    this.todoInput.focus(); 
+    this.todoInput.focus();
   }
 
   updateText(event) {
@@ -30,10 +30,15 @@ class TodoInput extends Component {
   }
 
   render() {
-    return(<div className="todo__input">
-      <input ref={(input) => { this.todoInput = input; }} type="text" className="form-control" id="todoInput" onChange={this.updateText}></input>
-      <input type="button" id="addTodo" className="btn btn-primary btn-sm" value="Add" onClick={this.handleAddTodo}></input>
-    </div>)
+    return(
+      <div className="row">
+          <div className='col-sm-8'>
+            <input ref={(input) => { this.todoInput = input; }} type="text" className="form-control" id="todoInput" onChange={this.updateText}></input>
+          </div>
+          <div className='col-sm-4'>
+            <button id="addTodo" className="btn btn-primary" onClick={this.handleAddTodo}><span className="glyphicon glyphicon-plus" aria-hidden="true"></span>Add</button>
+          </div>
+      </div>)
   }
 }
 
