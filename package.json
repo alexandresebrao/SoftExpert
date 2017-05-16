@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --progress --inline --hot",
+    "start": "webpack-dev-server --hot --inline",
     "build": "webpack"
   },
   "author": "",
@@ -22,6 +22,7 @@
     "bootstrap": "^3.3.7",
     "bootstrap-loader": "^2.1.0",
     "browserify": "^14.3.0",
+    "compression-webpack-plugin": "^0.4.0",
     "css-loader": "^0.23.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "immutable": "^3.8.1",
@@ -32,6 +33,7 @@
     "postcss-loader": "^2.0.5",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-hot-loader": "^3.0.0-beta.7",
     "react-redux": "^5.0.4",
     "redux": "^3.6.0",
     "style-loader": "^0.13.0",
@@ -48,8 +50,10 @@
     "less": "^2.7.2",
     "less-loader": "^4.0.3",
     "postcss-loader": "^2.0.5",
+    "react-hot-loader": "^3.0.0-beta.7",
     "uglify-js-brunch": "^2.10.0",
     "url-loader": "^0.5.8",
-    "webpack-dev-server": "^1.9.0"
+    "webpack-dev-server": "^1.9.0",
+    "webpack-hot-middleware": "^2.18.0"
   }
 }

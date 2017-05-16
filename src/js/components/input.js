@@ -36,7 +36,7 @@ class TodoInput extends Component {
             <input ref={(input) => { this.todoInput = input; }} type="text" className="form-control" id="todoInput" onChange={this.updateText}></input>
           </div>
           <div className='col-sm-4'>
-            <button id="addTodo" className="btn btn-primary" onClick={this.handleAddTodo}><span className="glyphicon glyphicon-plus" aria-hidden="true"></span>Add</button>
+            <button id="addTodo" className="btn btn-primary" onClick={this.handleAddTodo}><span className="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Todo</button>
           </div>
       </div>)
   }

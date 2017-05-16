@@ -1,14 +1,21 @@
 var path = require('path');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var webpack = require('webpack');
+var CompressionPlugin = require("compression-webpack-plugin");
 
 module.exports = {
-    entry: ['babel-polyfill', path.normalize(__dirname + '/src/js/main.js')],
+  entry: [
+      'babel-polyfill', path.normalize(__dirname + '/src/js/main.js'),  // Your appʼs entry point
+    ],
     devtool: 'cheap-module-source-map',
     output: {
         filename: 'bundle.js',
         path: path.join(__dirname, 'dist')
     },
+    devServer: {
+      contentBase: "./",
+      hot: true
+      },
     module: {
         loaders: [
           { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" },
@@ -41,10 +48,18 @@ module.exports = {
                                                     $: 'jquery',
                                                     jquery: 'jquery'
                               }),
-      new webpack.EnvironmentPlugin(['NODE_ENV']),
       new ExtractTextPlugin("styles.css"),
       new webpack.optimize.UglifyJsPlugin({
         compress: { warnings: false }
+      }),
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.NoErrorsPlugin(),
+      new CompressionPlugin({
+            asset: "[path].gz[query]",
+            algorithm: "gzip",
+            test: /\.js$|\.css$|\.html$/,
+            threshold: 10240,
+            minRatio: 0.8
       })
     ]
 };
