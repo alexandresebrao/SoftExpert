@@ -1,59 +1,65 @@
 import {isEnabled} from './lib/feature';
+import React, { Component } from 'react';
+import TodoInput from './components/input.js';
+import TodosList from './components/todoslist.js';
+import Filters from './components/filters.js'
+import {todos} from './state';
+import {addTodo, toggleTodoState} from './actions';
+import Header from './components/header.js';
 
-export function render(el, state) {
-    const todoItems = state.todos.map(renderTodoItem).join('');
-    el.innerHTML = renderApp(
-        renderInput(),
-        renderTodos(todoItems),
-    );
-}
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {renderBottom:isEnabled('renderBottom'), filterDefault: 'showall', todos: todos.getState().todos};
+    this.addTodo = this.addTodo.bind(this);
+    this.toogleTodo = this.toogleTodo.bind(this);
+    this.handleAdd = this.handleAdd.bind(this);
+  }
 
-function renderApp(input, todoList) {
-    if(isEnabled('renderBottom')) {
-        return renderAddTodoAtBottom(input, todoList);
-    } else {
-        return renderAddTodoAtTop(input, todoList);
+  addTodo(text) {
+    todos.dispatch(addTodo(text));
+    localStorage.setItem("todos", JSON.stringify(todos.getState()))
+  }
+
+  toogleTodo(id) {
+    todos.dispatch(toggleTodoState(id));
+    localStorage.setItem("todos", JSON.stringify(todos.getState()))
+    this.setState({todos: todos.getState().todos})
+  }
+
+
+  handleAdd(text) {
+    todos.dispatch(addTodo(text));
+    localStorage.setItem("todos", JSON.stringify(todos.getState()))
+    this.setState({todos: todos.getState().todos})
+  }
+
+  render() {
+    var filter = "";
+    if (enableFilter) {
+        filter = <Filters />
     }
+
+    if (this.state.renderBottom) {
+      return (
+        <div className="container">
+          <Header />
+          <TodosList todos ={this.state.todos} toogleTodo={this.toogleTodo}/>
+          <TodoInput onAdd={this.handleAdd} />
+        </div>
+      )
+    }
+    else {
+      return (
+        <div className="container">
+          <Header />
+          <TodoInput onAdd={this.handleAdd} />
+          {filter}
+          <TodosList todos = {this.state.todos} toogleTodo={this.toogleTodo} />
+        </div>
+      )
+    }
+  }
 }
 
-
-function renderAddTodoAtTop(input, todoList) {
-    return `<div id="app">
-        ${input}
-        ${enableFilter ? renderFilters() : ''}
-        ${todoList}
-    </div>`;
-}
-
-function renderAddTodoAtBottom(input, todoList) {
-    return `<div id="app">
-        ${enableFilter && isEnabled('filterTop')  ? renderFilters() : ''}
-        ${todoList}
-        ${input}
-        ${enableFilter && !isEnabled('filterTop') ? renderFilters() : ''}
-    </div>`;
-}
-
-function renderInput() {
-    return `<div class="todo__input"><input type="text" id="todoInput"><button id="addTodo" class="btn btn-primary">Add</button></div>`;
-}
-
-function renderTodos(todoItems) {
-    return `<ul class="todo">${todoItems}</ul>`;
-}
-
-function renderFilters() {
-  return  `<div class="todo__filter">
-            <input type="radio" name="filterRadio" id="filterRadio" value="SHOWALL" checked="true">Show All</input>
-            <input type="radio" name="filterRadio" id="filterRadio" value="SHOWOPEN">Open</input>
-            <input type="radio" name="filterRadio" id="filterRadio" value="SHOWDONE" >Done</input>
-          </div>`
-}
-
-function renderTodoItem(todo) {
-    const todoClass = `todo__item todo__item--${todo.done ? 'done' : 'open'}`;
-    return `<li class="${todoClass}">
-        <input class="js_toggle_todo" type="checkbox" data-id="${todo.id}"${todo.done ? ' checked' : ''}>
-        ${todo.text}
-    </li>`;
-}
+export default App;

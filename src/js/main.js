@@ -1,11 +1,14 @@
 import '../css/main.css';
 
-import {todos} from './state';
-import {render} from './view';
-import {registerEventHandlers} from './events';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import todos from './reducers/todos'
+import App from './view.js'
 
-todos.subscribe(newState => render(document.body, newState));
 
-render(document.body, todos.getState());
-
-registerEventHandlers();
+ReactDOM.render(
+    <App />,
+  document.getElementById('root')
+)
