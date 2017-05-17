@@ -2,6 +2,7 @@ var path = require('path');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var webpack = require('webpack');
 var CompressionPlugin = require("compression-webpack-plugin");
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: [
@@ -52,7 +53,7 @@ module.exports = {
       new webpack.optimize.UglifyJsPlugin({
         compress: { warnings: false }
       }),
-      new webpack.HotModuleReplacementPlugin(),
+
       new webpack.NoErrorsPlugin(),
       new CompressionPlugin({
             asset: "[path].gz[query]",
@@ -60,6 +61,11 @@ module.exports = {
             test: /\.js$|\.css$|\.html$/,
             threshold: 10240,
             minRatio: 0.8
+      }),
+      new webpack.HotModuleReplacementPlugin(),
+      new HtmlWebpackPlugin({
+        template: 'index.template.ejs',
+        inject: 'body',
       })
     ]
 };
