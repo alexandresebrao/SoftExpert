@@ -3,14 +3,14 @@
 ## Extenda uma aplicação de TodoList simples
 
 Olá, esta é uma pequena aplicação de todo list, que você deverá extender e melhorar.
-Na SoftExpert nós tentamos cuidar bastante das nossas escolhas e sempre pensamos no valor que 
+Na SoftExpert nós tentamos cuidar bastante das nossas escolhas e sempre pensamos no valor que
 o usuário irá receber.
 
 Durante este case study você será perguntado à fazer algmas melhorias em toda a aplicação.
 
 ## Requerimentos
 
-Por favor, tenha certeza que você tem instalado no seu ambiente o Node.js. 
+Por favor, tenha certeza que você tem instalado no seu ambiente o Node.js.
 Esta aplicação foi feita utilizando webpack, e sem estas duas ferramentas não há como prosseguir:
 
 - Node.js (recommended: 4.x)
@@ -18,7 +18,7 @@ Esta aplicação foi feita utilizando webpack, e sem estas duas ferramentas não
 
 ## Setup
 
-Uma vez que você garantiu a instalação das ferramentas acima, por favor instale os 
+Uma vez que você garantiu a instalação das ferramentas acima, por favor instale os
 módulos requeridos da aplicação, usando o comando:
 
 
@@ -35,10 +35,10 @@ npm run build
 e para continuar recriando o build enquanto trabalha, use:
 
 ```sh
-npm start
+npm start // Not working yet
 ```
 
-Assim que você tiver o bundle construído, você pode abrir o `index.html`  no seu browser e 
+Assim que você tiver o bundle construído, você pode abrir o `index.html`  no seu browser e
 verificar se a aplicação está funcionando corretamente.
 
 ## Como habilitar um teste?
@@ -46,7 +46,7 @@ verificar se a aplicação está funcionando corretamente.
 Como esta aplicação é para ser supostamente um case study e não uma aplicação real,
 você pode habilitar testes específicos, adicionado "#testName" na URL.
 
-Por exemplo, para habilitar o teste "renderBottom", você abrirá o arquivo `index.html` 
+Por exemplo, para habilitar o teste "renderBottom", você abrirá o arquivo `index.html`
 e adicionará no final a hash "#renderBottom".
 
 Example URL:
@@ -101,7 +101,7 @@ Por favor, garanta que ao adicionar um todo item, o foco irá voltar (ou manter-
 Como um usuário, eu quero ter uma opção para esconder itens que não me interessam
 baseado nos seus status.
 
-Essa feature deve ser implementada como um teste, similar ao "renderBottom", 
+Essa feature deve ser implementada como um teste, similar ao "renderBottom",
 e deve se chamar "filter".
 
 Por favor, implemente o filtro abaixo da lista como radio buttons, contendo estas três opções:
@@ -112,8 +112,8 @@ Por favor, implemente o filtro abaixo da lista como radio buttons, contendo esta
 
 Estes radio buttons devem ser mutuamente exclusivos, apenas um deles pode ser selecionado.
 
-Ex.: se "Somente abertos" estiver selecionados, apenas os todo items que tiverem o `done` 
-setado como `false` devem ser mostrados. 
+Ex.: se "Somente abertos" estiver selecionados, apenas os todo items que tiverem o `done`
+setado como `false` devem ser mostrados.
 
 ### WEB-104: Adicione um TESTE para mudar a posição do filtro
 
@@ -129,13 +129,13 @@ estão ativos também. A hash da URL deve estar mais ou menos assim "index.html#
 
 ### WEB-110: Melhore a aparência visual da aplicação
 
-Nosso departamento de design acredita que o design atual não é o melhor e pode ser melhorado. 
+Nosso departamento de design acredita que o design atual não é o melhor e pode ser melhorado.
 
 Por favor, melhore esta experiência para o usuário. Sinta-se livre para usar seu próprio design,
 ou para implementar um já existente. Se você não consegue decidir em qual utilizar, nossa proposta
 seria utilizar [este aqui](https://dribbble.com/shots/2084038-Just-Do).
 
-Sinta-se livre também para adicionar um pré-processador CSS como Sass, PostCSS ou 
+Sinta-se livre também para adicionar um pré-processador CSS como Sass, PostCSS ou
 Less ao build do webpack para tornar sua vida um pouco mais fácil.
 Usar CSS puro, também não é um problema. Faça como achar melhor.
 
@@ -161,14 +161,14 @@ e carregue o arquivo CSS separamente do bundle javascript.
 
 ### WEB-202: Otimize a geração do bundle
 
-Atualmente nosso bundle gerado não está otimizado e está um pouco grande para uma 
+Atualmente nosso bundle gerado não está otimizado e está um pouco grande para uma
 aplicação pequena. Por favor, ajuste as configurações do webpack para que possamos
 criar um bundle otimizado ao invés do bundle grande. Seria ideal se tanto Javascript
 e o CSS fossem minificados.
 
 ### WEB-203: Substitua a lib/state.js
 
-Acontece que nós não estamos imunes à "sindrome das libs não inventadas aqui", e 
+Acontece que nós não estamos imunes à "sindrome das libs não inventadas aqui", e
 pensamos que seria uma boa ideia reimplementar uma lib popular atualmente.
 Mas achamos que agora não há boas razões pra manter essa lib já que a lib na qual
 nós nos inspiramos está bem confiável. Dito isso, gostaríamos que a nossa lib/state.js
@@ -181,15 +181,15 @@ para que use `Redux` invés do código que fizemos nós mesmos.
 
 Infelizmente alguns dos nossos usuários começaram a reclamar que a performance
 da aplicação está ruim. Alguns deles disseram que adicionaram *mais mil* todo items
-e que chegando neste grande número a aplicação começa a travar após adicionar mais 
+e que chegando neste grande número a aplicação começa a travar após adicionar mais
 todo items ou modificar algum estado.
 
 Nosso time de performance identificou que este problema esta relacionado ao modo
-como nós renderizamos a o HTML da aplicação. 
+como nós renderizamos a o HTML da aplicação.
 
-Por favor, substitua o `innerHTML` pela library React.js, que tem internamente o 
+Por favor, substitua o `innerHTML` pela library React.js, que tem internamente o
 virtualDom para tratar de gargalos em manipulação do DOM.
-Será necessário adicionar um plugin ao `Babel` para usar a sintaxe JSX. Claro que 
+Será necessário adicionar um plugin ao `Babel` para usar a sintaxe JSX. Claro que
 se você desejar, pode escrever o código em Javascript puro, entretanto recomendamos
 que a sintaxe JSX seja usada.
 
@@ -204,7 +204,7 @@ Nós gostaríamos de poder decidir na compilação do  bundle, se o teste "filte
 deve ou não estar habilitado.
 
 Por favor, crie um plugin babel que pode alterar estaticamente o código `isEnabled('filter')` por
-`true` ou `false` baseado em alguma parte da configuração webpack (à sua escolha). 
+`true` ou `false` baseado em alguma parte da configuração webpack (à sua escolha).
 
 Dica: Provavelmente você pode criar um webpack loader para isso.
 
@@ -215,5 +215,5 @@ poderiam e precisam constantemente atualizar a página e esperar o webpack watch
 para ver suas alterações. Nós acreditamos que usando o webpack dev server, eles poderiam
 ser mais produtivos.
 
-Por favor, ajuste todas as partes necessárias da aplicação para que seja possíbel 
+Por favor, ajuste todas as partes necessárias da aplicação para que seja possíbel
 utilizar o webpack-dev-server e idealmente com o hot reloading pelo menos para o CSS.
