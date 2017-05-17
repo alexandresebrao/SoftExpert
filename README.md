@@ -35,10 +35,10 @@ npm run build
 e para continuar recriando o build enquanto trabalha, use:
 
 ```sh
-npm start // Not working yet
+npm start
 ```
 
-Assim que você tiver o bundle construído, você pode abrir o `index.html`  no seu browser e
+Assim que você tiver o bundle construído, você pode abrir o `dist/index.html`  no seu browser e
 verificar se a aplicação está funcionando corretamente.
 
 ## Como habilitar um teste?
