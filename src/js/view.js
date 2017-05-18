@@ -6,15 +6,17 @@ import Filters from './components/filters.js'
 import {todos} from './state';
 import {addTodo, toggleTodoState} from './actions';
 import Header from './components/header.js';
+import Modal from 'react-modal';
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {renderBottom: isEnabled('renderBottom'), filterTop: isEnabled('filterTop'), filter: 'showall', todos: todos.getState().todos};
+    this.state = {showModal: false, renderBottom: isEnabled('renderBottom'), filterTop: isEnabled('filterTop'), filter: 'showall', todos: todos.getState().todos};
     this.addTodo = this.addTodo.bind(this);
     this.toogleTodo = this.toogleTodo.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
     this.handleFilterChange = this.handleFilterChange.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
   }
 
   addTodo(text) {
@@ -30,13 +32,22 @@ class App extends Component {
 
 
   handleAdd(text) {
-    todos.dispatch(addTodo(text));
-    localStorage.setItem("todos", JSON.stringify(todos.getState()))
-    this.setState({todos: todos.getState().todos})
+    if (text === '') {
+      this.setState({showModal: true})
+    } else {
+      todos.dispatch(addTodo(text));
+      localStorage.setItem("todos", JSON.stringify(todos.getState()))
+      this.setState({todos: todos.getState().todos})
+    }
   }
 
   handleFilterChange(value) {
     this.setState({filter: value});
+  }
+
+
+  handleCloseModal () {
+    this.setState({ showModal: false });
   }
 
   render() {
@@ -73,6 +84,21 @@ class App extends Component {
     else {
       return (
         <div className="container">
+          <Modal
+            isOpen={this.state.showModal}
+            onAfterOpen={this.afterOpenModal}
+            onRequestClose={this.closeModal}
+            contentLabel="Example Modal"
+            >
+
+            <h2 ref={subtitle => this.subtitle = subtitle}>Error</h2>
+            <div className="spacer20"></div>
+            <div>O campo texto para adicionar um ToDo não pode estar em branco</div>
+            <div className="spacer20"></div>
+            <button onClick={this.handleCloseModal} className="btn btn-danger">Fechar</button>
+
+          </Modal>
+
           <Header />
           <TodoInput onAdd={this.handleAdd} />
           {filter}
