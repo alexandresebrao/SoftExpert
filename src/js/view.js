@@ -6,7 +6,7 @@ import Filters from './components/filters.js'
 import {todos} from './state';
 import {addTodo, toggleTodoState} from './actions';
 import Header from './components/header.js';
-import Modal from 'react-modal';
+import ModalError from './components/modalerror.js'
 
 class App extends Component {
   constructor(props) {
@@ -61,6 +61,7 @@ class App extends Component {
       return (
         <div className="container">
           <Header />
+          <ModalError showModal={this.state.showModal} handleCloseModal={this.handleCloseModal} />
           {filter}
           <div className="spacer10"></div>
           <h2>My ToDo(s)</h2>
@@ -72,6 +73,7 @@ class App extends Component {
     if (this.state.renderBottom) {
       return (
         <div className="container">
+          <ModalError showModal={this.state.showModal} handleCloseModal={this.handleCloseModal} />
           <Header />
           <h2>My ToDo(s)</h2>
           <div className="spacer10"></div>
@@ -84,20 +86,7 @@ class App extends Component {
     else {
       return (
         <div className="container">
-          <Modal
-            isOpen={this.state.showModal}
-            onAfterOpen={this.afterOpenModal}
-            onRequestClose={this.closeModal}
-            contentLabel="Example Modal"
-            >
-
-            <h2 ref={subtitle => this.subtitle = subtitle}>Error</h2>
-            <div className="spacer20"></div>
-            <div>O campo texto para adicionar um ToDo não pode estar em branco</div>
-            <div className="spacer20"></div>
-            <button onClick={this.handleCloseModal} className="btn btn-danger">Fechar</button>
-
-          </Modal>
+          <ModalError showModal={this.state.showModal} handleCloseModal={this.handleCloseModal} />
 
           <Header />
           <TodoInput onAdd={this.handleAdd} />
